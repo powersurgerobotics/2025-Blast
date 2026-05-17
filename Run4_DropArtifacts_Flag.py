@@ -113,7 +113,7 @@ async def Move_Right_Attachment_Forward(speed, desired_position):
         motor.run(port.A,speed_to_move,acceleration=10000)
     motor.stop(port.A,stop=motor.BRAKE)
     #print(abs(motor.relative_position(port.A)))
-    #await runloop.sleep_ms(1000) # wait for a second
+    await runloop.sleep_ms(1000) # wait for a second
 
 
 async def Move_Left_Attachment_Backward(speed, desired_position):
@@ -139,21 +139,19 @@ async def Move_Left_Attachment_Forward(speed, desired_position):
         motor.run(port.B,speed_to_move,acceleration=10000)
     motor.stop(port.B,stop=motor.BRAKE)
     #print(abs(motor.relative_position(port.B)))
-    await runloop.sleep_ms(1000) # wait for a second
+    #await runloop.sleep_ms(1000) # wait for a second
 
 
 async def runMission():
     yaw_value = 0
-    speed_percent = 50
-    await Gyro_Move_Forward_By_Distance(yaw_value,16,speed_percent) # Move Straight until the specified distance point and stop.
-    await Move_Right_Attachment_Forward(40, 30)
-    await Gyro_Move_Backward_By_Distance(yaw_value,1.5,speed_percent) # Move Straight until the specified distance point and stop.
-    await Gyro_Move_Forward_By_Distance(yaw_value,0.5,speed_percent) # Move Straight until the specified distance point and stop.
-    await Move_Right_Attachment_Backward(40,20)
-    await Gyro_Right_turn(2)
-    speed_percent = 30
-    await Gyro_Move_Forward_By_Distance(yaw_value,7,speed_percent) # Move Straight until the specified distance point and stop.
-    speed_percent = 90
-    yaw_value =0
-    await Gyro_Move_Backward_By_Distance(yaw_value,23,speed_percent) # Move Straight until the specified distance point and stop.
+    speed_percent = 70
+    await Gyro_Move_Forward_By_Distance(yaw_value,17.5,speed_percent) # Move Straight until the specified distance point and stop.
+    #await Gyro_Right_turn(8)
+    await Gyro_Move_Backward_By_Distance(yaw_value,4, speed_percent)
+    await Move_Left_Attachment_Forward(50,40) # move back so run 5 alignment stays in home base
+    await Gyro_Move_Backward_By_Distance(yaw_value,15, speed_percent)
+
+
+
+
 runloop.run(runMission())

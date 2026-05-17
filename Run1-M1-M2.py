@@ -137,25 +137,24 @@ async def Move_Left_Attachment_Forward(speed, desired_position):
         motor.run(port.B,speed_to_move,acceleration=10000)
     motor.stop(port.B,stop=motor.BRAKE)
 
-
-
 async def runMission():
     yaw_value = 0
     speed_percent = 70
-    await Gyro_Move_Forward_By_Distance(yaw_value,24.5,speed_percent) # Move Straight until the specified distance point and stop.
+    await Gyro_Move_Forward_By_Distance(yaw_value,24,speed_percent) # Move Straight until the specified distance point and stop.
+    await Move_Left_Attachment_Forward(50,15)
     await Gyro_Left_turn(31)
     speed_percent = 30
-    await Gyro_Move_Forward_By_Distance(yaw_value,10,speed_percent) # Move Straight until the specified distance point and stop.
-    await Move_Right_Attachment_Backward(50,25)
-    await Gyro_Move_Backward_By_Distance(yaw_value,7,speed_percent) # Move Straight until the specified distance point and stop.
-    await Gyro_Right_turn(31)
-    await Move_Left_Attachment_Backward(50,25)
-    speed_percent = 70
-    await Gyro_Move_Backward_By_Distance(yaw_value,9,speed_percent) # Move Straight until the specified distance point and stop.
     await Gyro_Move_Forward_By_Distance(yaw_value,9,speed_percent) # Move Straight until the specified distance point and stop.
-    await Move_Left_Attachment_Forward(50,28)
-    await Gyro_Move_Backward_By_Distance(yaw_value,3,speed_percent) # Move Straight until the specified distance point and stop.
-    await Gyro_Right_turn(25)
-    speed_percent = 80
-    await Gyro_Move_Backward_By_Distance(yaw_value,25,speed_percent) # Move Straight until the specified distance point and stop.
+    await Move_Right_Attachment_Backward(50,25)
+    await Gyro_Move_Backward_By_Distance(yaw_value,8,speed_percent) # Move Straight until the specified distance point and stop.
+    await Gyro_Right_turn(33)
+    await Move_Left_Attachment_Backward(50,16)
+    speed_percent = 30
+    await Gyro_Move_Backward_By_Distance(yaw_value,6,speed_percent) # Move Straight until the specified distance point and stop.
+    #await Gyro_Right_turn(4)
+    #await Gyro_Move_Backward_By_Distance(yaw_value,4,speed_percent)
+    await Move_Left_Attachment_Forward(10,15)
+    await Gyro_Right_turn(10)
+    speed_percent = 90
+    await Gyro_Move_Backward_By_Distance(yaw_value,20,speed_percent)
 runloop.run(runMission())
